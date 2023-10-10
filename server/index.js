@@ -11,12 +11,15 @@ import { fileURLToPath } from 'url';
 
 import authRoutes from './routes/authRoute.js';
 import userRoutes from './routes/userRoute.js';
-import postRouter from './routes/postRoute.js';
+import postRoutes from './routes/postRoute.js';
 
 import { register } from './controllers/authController.js';
 import { createPost } from './controllers/postController.js';
 import { verifyToken } from './controllers/authController.js';
 
+// import User from './models/userModel.js';
+// import Post from './models/postModel.js';
+// import { users, posts } from './data/index.js';
 // CONFIGURATIONS
 
 const __filename = fileURLToPath(import.meta.url);
@@ -70,6 +73,8 @@ mongoose
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+    // User.insertMany(users);
+    // Post.insertMany(posts);
   })
   .catch((error) => {
     console.log(`${error} did not connect`);
