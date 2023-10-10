@@ -11,7 +11,11 @@ import { fileURLToPath } from 'url';
 
 import authRoutes from './routes/authRoute.js';
 import userRoutes from './routes/userRoute.js';
+import postRouter from './routes/postRoute.js';
+
 import { register } from './controllers/authController.js';
+import { createPost } from './controllers/postController.js';
+import { verifyToken } from './controllers/authController.js';
 
 // CONFIGURATIONS
 
@@ -45,11 +49,14 @@ const upload = multer({ storage });
 
 // ROUTES WITH FILES
 app.post('/auth/register', upload.single('picture'), register);
-
+app.post('/posts', verifyToken, upload.single('picture'), createPost);
 //ROUTES
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
-// MONFOOSE SETUP
+app.use('/posts', postRoutes);
+
+// MONGOOSE SETUP
+
 const PORT = process.env.PORT || 6001;
 const DB = process.env.MONGO_URL.replace(
   '<PASSWORD>',
