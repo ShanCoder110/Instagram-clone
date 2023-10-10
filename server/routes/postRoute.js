@@ -3,7 +3,6 @@ import {
   getFeedPosts,
   getUserPosts,
   likePost,
-  commentPost,
 } from './../controllers/postController.js';
 import { verifyToken } from './../controllers/authController.js';
 
@@ -15,3 +14,5 @@ router.get('/:userId/posts', verifyToken, getUserPosts);
 
 //UPDATE
 router.patch('/:id/like', verifyToken, likePost);
+
+export default router;

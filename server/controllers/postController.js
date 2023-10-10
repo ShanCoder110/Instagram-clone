@@ -1,5 +1,5 @@
 import Post from './../models/postModel.js';
-import User from './../mdoels/userModel.js';
+import User from './../models/userModel.js';
 export const createPost = async (req, res) => {
   try {
     const { userId, description, picturePath } = req.body;
