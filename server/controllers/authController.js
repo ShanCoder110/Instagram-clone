@@ -65,11 +65,14 @@ export const login = async (req, res) => {
         .status(400)
         .json({ status: 'fail', message: 'User does not exist.' });
 
-    const isMatch = await bcrypt.compare(password, userpasssword);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
       return res.status(400).json({ message: 'Invalid Credentials.' });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     delete user.password;
-  } catch (err) {}
+    res.status(200).json({ user, token });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
 };
